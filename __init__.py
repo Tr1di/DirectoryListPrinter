@@ -1,8 +1,12 @@
+import configparser
 import tempfile
 import glob
 import os
 import sys
 import xlsxwriter
+
+config = configparser.ConfigParser()
+config.read("Config.ini")
 
 TEXT_FORMAT = {
     'font_color': 'black',
@@ -13,7 +17,11 @@ TEXT_FORMAT = {
 }
 
 DIRECTORY = sys.argv[1]
-SAVE_DIRECTORY = os.path.expanduser("~/Documents") + "/Оглавления/"
+SAVE_DIRECTORY = config["Directory"]["SaveDirectory"]
+if SAVE_DIRECTORY == "~/Documents":
+    SAVE_DIRECTORY + os.path.expanduser("~/Documents")
+SAVE_DIRECTORY += "/Оглавления/"
+
 
 PRINT_LIST = False
 DELETE_LIST = False
@@ -77,9 +85,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 3:
         DELETE_LIST = bool(sys.argv[3].lower())
 
-    if len(sys.argv) > 4:
-        SAVE_DIRECTORY = sys.argv[4]
-        if not is_a_slash(SAVE_DIRECTORY[-1]):
-            SAVE_DIRECTORY += "\\"
+    if not is_a_slash(SAVE_DIRECTORY[-1]):
+        SAVE_DIRECTORY += "\\"
 
     generate_list(DIRECTORY, SAVE_DIRECTORY)

@@ -15,7 +15,7 @@ PRINT_LIST_PATH = REG_PATH + r"\Напечатать оглавление"
 CREATE_LIST_KEY = CREATE_LIST_PATH + r"\command"
 PRINT_LIST_KEY = PRINT_LIST_PATH + r"\command"
 
-PROJECT_DIR = os.path.realpath(__file__).replace("configure.py", "")
+PROJECT_DIR = os.path.realpath(__file__).replace("Edit Registry.py", "")
 PYTHON_EXE = PROJECT_DIR + r"venv\Scripts\python.exe"
 GENERATOR = PROJECT_DIR + r"__init__.py"
 
